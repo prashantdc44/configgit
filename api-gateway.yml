@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: review-service
+          uri: lb://review-service
+          predicates:
+            - Path=/review/**
+        - id: customer-service
+          uri: lb://customer-service
+          predicates:
+            - Path=/customer/**
+
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost     
+    
